@@ -1,0 +1,24 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictPropertyInitialization": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions":true,
+    "resolveJsonModule": true,
+    "outDir": "build",
+    "rootDirs": ["src", "./scripts", "./test",],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["test", "src", "scripts","typechain-types","artifacts"],
+  "exclude": ["node_modules"],
+  "files": ["./hardhat.config.ts"]
+}

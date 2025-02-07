@@ -1,0 +1,1 @@
+export type MintCostRegister = Map<number, bigint>;
