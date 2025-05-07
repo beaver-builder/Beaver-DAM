@@ -17,10 +17,12 @@ export async function deployContractUSDT() {
   
 }
 
-export async function deployContractLpValocracy() {
-  
+export async function deployContractLpValocracy(ownerValocracyAddress?:string) {
+
+  const ownerValocracy = ownerValocracyAddress ? ownerValocracyAddress : env.ADDRESS_LINEA_OWNER_BEAVER
+
   const contractFactory = await ethers.getContractFactory('contracts/LpValocracy.sol:LpValocracy');
-  const args = [1000000000,env.ADDRESS_LINEA_OWNER_BEAVER] as const;
+  const args = ["1000000000000000000000000",ownerValocracy] as const;
 
   const contract = await contractFactory.deploy(...args);
   await contract.waitForDeployment();

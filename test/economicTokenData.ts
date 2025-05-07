@@ -309,7 +309,7 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
      * @valocracy  contrato principal da Valocracia
      * @lpContract contrato LP token(ERC20)
      */
-    lpContract  = await deployContractLpValocracy() as LpValocracy
+    lpContract  = await deployContractLpValocracy(OWNER.address) as LpValocracy
     USDCContract = await  deployContractUSDT() as USDCVALOCRACY 
 
     lpContractAddress = await lpContract.getAddress();
@@ -348,8 +348,13 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
 
     console.log("\n===================  \n\n")
 
+    console.log("USDCContract.address ->",USDTAddress)
+
     const balanceOwner = await USDCContract.balanceOf(DEPLOYER.address)
     console.log("BALANCE DEPLOYER USDCVALOCRACY->",ethers.formatUnits(balanceOwner,6))
+
+    const balanceOwner2 = await lpContract.balanceOf(OWNER.address)
+    console.log("BALANCE OWNER LP->",ethers.formatUnits(balanceOwner2,6))
 
     localBalanceEconomicTotal = 1000;
     const amountUSDT = ethers.parseUnits("1000", 6);
@@ -367,11 +372,18 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
   it("Aprove LP to valocracy", async function () {
     console.log("\n =================== \n\n");
 
-    const amountToToken = ethers.parseUnits("1000000000", 6);
+    const balanceDeployer = await lpContract.balanceOf(DEPLOYER.address)
+    console.log("BALANCE DEPLOYER LP->",ethers.formatUnits(balanceDeployer,6))
+
+    await lpContract.transfer(OWNER.address,balanceDeployer)
+    const balanceOwner = await lpContract.balanceOf(OWNER.address)
+    console.log("BALANCE OWNER LP->",ethers.formatUnits(balanceOwner,6))  
+
+    const amountToToken = ethers.parseUnits("1000000000000000000000000", 6);
     await lpContract.approveLpSpender(OWNER.address,valocracyAddress,amountToToken)
     const allowance = await lpContract.allowance(OWNER.address,valocracyAddress)
 
-    expect( ethers.formatUnits(allowance,6)).to.deep.equal("1000000000.0");
+    expect( ethers.formatUnits(allowance,6)).to.deep.equal("1000000000000000000000000.0");
   });
 
   /**
@@ -433,6 +445,7 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
           mintsRAEL.mintDatas[index].tokenMetadata,
           mintCost
         );
+
 
         const transation = await tx.wait()
         transactionMintCost = await gasService.transactionGasCost(transation)
@@ -681,9 +694,13 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
 
     console.log('\n\n\n --- CLAIM RAEL TOKEN 2 --- \n\n\n ')
 
-    const nftIdClaim = 2
+    const nftIdClaim = 6
 
     const nftMintCost = mintCostRegister.get(nftIdClaim)
+    const cost = await RAELsigner.getEconomicTokenMintCost(nftIdClaim)
+
+    console.log("nftMintCost ->",nftMintCost)
+    console.log("cost ->",cost)
     let tx = await RAELsigner.claim(nftIdClaim,{value:nftMintCost});
 
     balanceLocalRAEL = await updateBalancex(tx,balanceLocalRAEL)
@@ -728,7 +745,7 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
     console.log("\n ===================  \n\n")
     console.log("forfeiting RAEL")
 
-    let forfeitingTokenId = 126
+    let forfeitingTokenId = 130
     await forfeiting(forfeitingTokenId)
     let nftMintCost = mintCostRegister.get(forfeitingTokenId)
     let tx = await RAELsigner.forfeiting(forfeitingTokenId,{value:nftMintCost});
@@ -740,7 +757,7 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
     tx = await RAELsigner.forfeiting(forfeitingTokenId,{value:nftMintCost});
     balanceLocalRAEL = await updateBalancex(tx,balanceLocalRAEL)
 
-    forfeitingTokenId = 194
+    forfeitingTokenId = 198
     await forfeiting(forfeitingTokenId)
     nftMintCost = mintCostRegister.get(forfeitingTokenId)
     tx = await RAELsigner.forfeiting(forfeitingTokenId,{value:nftMintCost});
@@ -814,10 +831,10 @@ describe("\n\n  == VALOCARACY TEST == \n\n", function () {
   * Retorna saldo em usdt do owner
   */
   it("Transfer", async function () {
-    let tx = await RAELsigner.transferFrom(RAEL.address, VIT.address,130)
+    let tx = await RAELsigner.transferFrom(RAEL.address, VIT.address,134)
 
     balanceLocalRAEL = await updateBalancex(tx,balanceLocalRAEL)
-    await transfer(130)
+    await transfer(134)
 
     console.log("\n ===================  \n\n")
   });
