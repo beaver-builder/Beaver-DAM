@@ -13,7 +13,7 @@ export async function deployValocracy(lpContractAddress:string,USDTAddress:strin
   // Certifique-se de que estamos usando um endereço direto e não um nome ENS
   // Se env.OWNER_VALOCRACY_ADDRESS existir, use-o, caso contrário, use a primeira conta
   const [_,defaultSigner] = await ethers.getSigners();
-  const ownerAddress = env.OWNER_VALOCRACY_ADDRESS || await defaultSigner.getAddress();
+  const ownerAddress = await defaultSigner.getAddress();
 
   const args = [
     "ipfs://QmTL2h88FxDcURt5S7AF1B4rV1SRA7PHH5HZqbxvSHGYW5",
