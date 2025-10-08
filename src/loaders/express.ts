@@ -7,7 +7,6 @@ import {
   ErrorRequestHandler,
 } from "express";
 import cors from "cors";
-import logger from "./logger";
 import apiRouter from "@/routes";
 
 export default (app: Application) => {

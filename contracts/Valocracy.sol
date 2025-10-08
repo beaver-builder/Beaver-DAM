@@ -3,6 +3,28 @@ pragma solidity ^0.8.24;
 import {Collection} from "./Collection.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./ValocracyError.sol";
+
+/*
+
+██╗   ██╗ █████╗ ██╗      ██████╗  ██████╗██████╗  █████╗  ██████╗██╗ █████╗ 
+██║   ██║██╔══██╗██║     ██╔═══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██║██╔══██╗
+██║   ██║███████║██║     ██║   ██║██║     ██████╔╝███████║██║     ██║███████║
+╚██╗ ██╔╝██╔══██║██║     ██║   ██║██║     ██╔══██╗██╔══██║██║     ██║██╔══██║
+ ╚████╔╝ ██║  ██║███████╗╚██████╔╝╚██████╗██║  ██║██║  ██║╚██████╗██║██║  ██║
+  ╚═══╝  ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝╚═╝  ╚═╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                      VALOCRACY BEAVER SMART CONTRACT                      ║
+║                                                                           ║
+║   👤 Developer: Israel Zeferino                                           ║
+║   💼 Smart Contract Developer & Blockchain Architect                      ║
+║   🔐 Audited & Verified                                                   ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+*/
+
+
  
 contract Valocracy is Collection,ReentrancyGuard {
     

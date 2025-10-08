@@ -1,6 +1,6 @@
 //import database from "@/database/billing_control.database";
 import { ethers } from "ethers"; // Load Ethers library
-import { Valocracy,LpValocracy,USDCVALOCRACY } from "typechain-types";
+import { Valocracy,LpValocracy,USDCVALOCRACY } from "types/ethers-contracts";
 import valocracyArti from 'artifacts/contracts/Valocracy.sol/Valocracy.json';
 import lpValocracy from 'artifacts/contracts/LpValocracy.sol/LpValocracy.json';
 import usdcvalocracy from 'artifacts/contracts/USDCVALOCRACY.sol/USDCVALOCRACY.json';
@@ -17,8 +17,9 @@ class ValocracyService {
 	
 		await this.approve()
 
-		
+		if(!env.PRODUCTION) {
 			await this.TransferUSDT("1000")
+		}
 		
 	}
 

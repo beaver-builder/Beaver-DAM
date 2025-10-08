@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { JwtType } from "@/interfaces/types/jwt.type";
-import { Logger } from "@/helpers/Logger";
 import userService from "@/services/user.service";
 import { Console } from "console";
 // import UserService from "@api/services/users.service";
