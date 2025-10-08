@@ -16,4 +16,5 @@ sec-review.md
 rarity.txt
 .env.*
 logs
+types/ethers-contracts
 

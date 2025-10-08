@@ -50,6 +50,7 @@ interface ENV {
   OWNER_VALOCRACY_ADDRESS:string
   KEY_LINEA_DEPLOY_BEAVER:string
   ADDRESS_LINEA_OWNER_BEAVER:string
+  ETHERSCAN_API_KEY:string
 }
 const env: ENV = {
   // Application
@@ -67,6 +68,7 @@ const env: ENV = {
   OWNER_VALOCRACY_ADDRESS: process.env.OWNER_VALOCRACY_ADDRESS || '',
   KEY_LINEA_DEPLOY_BEAVER:process.env.KEY_LINEA_DEPLOY_BEAVER || '',
   ADDRESS_LINEA_OWNER_BEAVER:process.env.ADDRESS_LINEA_OWNER_BEAVER || '',
+  ETHERSCAN_API_KEY:process.env.ETHERSCAN_API_KEY || '',
 };
 
 export default env;

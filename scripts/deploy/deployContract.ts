@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ethers, network,run } from 'hardhat';
+import { network } from 'hardhat';
+import {expect, assert} from 'chai';
+
 import { Address } from 'cluster';
-import { LpValocracy, USDCVALOCRACY } from "../../typechain-types";
+//import { LpValocracy, USDCVALOCRACY } from "../../typechain-types";
 import { delay, isHardhatNetwork } from '../utils';
 import env from '@/config/index';
+
+const {ethers} = await network.connect();
 
 export async function deployContractUSDT() {
   

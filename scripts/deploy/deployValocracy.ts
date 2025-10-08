@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ethers,network,run } from "hardhat";
-import { delay, isHardhatNetwork } from '../utils';
+import hardhat, { network } from "hardhat";
+import { delay, isHardhatNetwork, normalizeVerifyArgs } from '../utils';
 import {
   LpValocracy,
   Valocracy,
   USDCVALOCRACY
-} from 'typechain-types';
+} from 'types/ethers-contracts';
 import env from '../../src/config';
+
+const {ethers} = await network.connect();
 
 
 async function deploy(contractPath:string, contractNane:string, args:any) {
@@ -40,23 +42,22 @@ async function deploy(contractPath:string, contractNane:string, args:any) {
   console.log(`\nDeployed to --> ${contractAddress}\n`);
 
   try {
-
-    if (!isHardhatNetwork()) {
+    if (!await isHardhatNetwork()) {
       console.log('Waiting 60 seconds before verifying contract...');
       await delay(60000);
-      await run('verify:verify', {
+      const constructorArgs = Array.isArray(args)
+        ? normalizeVerifyArgs([...args])
+        : [];
+      await hardhat.tasks.getTask(["verify", "etherscan"]).run({
         address: contractAddress,
-        constructorArguments: args,
+        constructorArgs,
         contract: contractPath,
       });
     }
-    
   } catch (error) {
-   
-    console.log('\nERROR VERIFY CONTRACT\n')
-    console.log(error)
-    console.log('\nERROR VERIFY CONTRACT\n')
-    
+    console.log('\nERROR VERIFY CONTRACT\n');
+    console.log(error);
+    console.log('\nERROR VERIFY CONTRACT\n');
   }
 
 
@@ -90,5 +91,3 @@ export async function deployValocracy(){
 
   await deploy("contracts/Valocracy.sol:Valocracy","VALOCRACY",argsValocracy)
 }
-
-

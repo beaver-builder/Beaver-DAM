@@ -1,40 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {run } from "hardhat";
-import { delay, isHardhatNetwork } from '../utils';
+import hardhat from "hardhat";
+import { delay, isHardhatNetwork, normalizeVerifyArgs } from "../utils";
+import env from "@/config";
 
-async function verify(contractPath:string, contractNane:string, args:any, contractAddress:string) {
-
-
-  console.log(`\n -- ${contractNane} --\n`);
-
+async function verify(
+  contractPath: string,
+  contractName: string,
+  args: any[],
+  contractAddress: string
+) {
+  console.log(`\n -- verify ${contractName} --\n`);
   try {
+    if (await isHardhatNetwork()) throw new Error("Network not supported");
 
-    if (isHardhatNetwork()) throw new Error("Ne")
+    const constructorArgs = Array.isArray(args)
+      ? normalizeVerifyArgs([...args])
+      : [];
 
-    await run('verify:verify', {
+    await hardhat.tasks.getTask(["verify", "etherscan"]).run({
       address: contractAddress,
-      constructorArguments: args,
+      constructorArgs: constructorArgs,
       contract: contractPath,
     });
-  
-    
   } catch (error) {
-   
-    console.log('\nERROR VERIFY CONTRACT\n')
-    console.log(error)
-    console.log('\nERROR VERIFY CONTRACT\n')
-    
+    console.log("\nERROR VERIFY CONTRACT\n");
+    console.log(error);
+    console.log("\nERROR VERIFY CONTRACT\n");
   }
-
-  console.log('\n====================\n\n')
-
+  console.log("\n====================\n\n");
 }
 
-export async function verifyContract(){
-  const args = [1000000] as const;
-  await verify("contracts/USDCVALOCRACY.sol:USDCVALOCRACY","USCT VALOCRACY",args, "0x63bE56747FECE0487F526008d7070713dBe3FfC5")
+export async function verifyContract() {
+  const argsLpValocracy = [(2n ** 200n),env.ADDRESS_LINEA_OWNER_BEAVER];
+
+  await verify(
+    "contracts/LpValocracy.sol:LpValocracy",
+    "LP VALOCRACY",
+    argsLpValocracy,
+    "0x5E2F387A4b8f8CEA4dDA27CAd13c8963530DC6Ca"
+  );
 }
-
-
-
-
