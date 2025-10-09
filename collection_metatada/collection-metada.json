@@ -1,0 +1,14 @@
+{
+    "name": "Beaver DAM",
+    "description": "Valocracy by Beaver",
+    "mediaUri": "ipfs://QmYJL5kweEgkjhTYTWZwCjtdwQyC4a7DiJWfD2Q4sTmQ7m",
+    "externalUri": "https://beaverbuilder.xyz/",
+    "thumbnailUri": "ipfs://QmYJL5kweEgkjhTYTWZwCjtdwQyC4a7DiJWfD2Q4sTmQ7m",
+    "license": "MIT",
+    "licenseUri": "",
+    "tags": [
+        "Valocracy",
+        "Beaver DAM",
+        "Beaver"
+    ]
+}

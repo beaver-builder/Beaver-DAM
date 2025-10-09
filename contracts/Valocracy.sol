@@ -17,7 +17,9 @@ import "./ValocracyError.sol";
 ║                      VALOCRACY BEAVER SMART CONTRACT                      ║
 ║                                                                           ║
 ║   👤 Developer: Israel Zeferino                                           ║
+║   🔗 Github: https://github.com/RaeII                                     ║
 ║   💼 Smart Contract Developer & Blockchain Architect                      ║
+║   🖥️ Monkey Branch                                                        ║
 ║   🔐 Audited & Verified                                                   ║
 ║                                                                           ║
 ╚═══════════════════════════════════════════════════════════════════════════╝

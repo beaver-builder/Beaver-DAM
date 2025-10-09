@@ -43,12 +43,9 @@ async function deploy(contractPath:string, contractNane:string, args:any) {
     if (!await isHardhatNetwork()) {
       console.log('Waiting 60 seconds before verifying contract...');
       await delay(60000);
-      const constructorArgs = Array.isArray(args)
-        ? normalizeVerifyArgs([...args])
-        : [];
       await hardhat.tasks.getTask(["verify", "etherscan"]).run({
         address: contractAddress,
-        constructorArgs,
+        constructorArgs: args,
         contract: contractPath,
       });
     }
@@ -80,7 +77,7 @@ export async function deployValocracy(){
   const LpValocracy = await deploy("contracts/LpValocracy.sol:LpValocracy","LP VALOCRACY",argsLpValocracy)
 
   const argsValocracy = [
-    "ipfs://QmTL2h88FxDcURt5S7AF1B4rV1SRA7PHH5HZqbxvSHGYW5",
+    "ipfs://QmaHYPkpyGx4a6N4nBYLMHntmj8wxRV2S7LtjU3yPgvYDx",
     LpValocracy.contractAddress,
     env.USDC_CONTRACT_ADDRESS,
     ethers.MaxUint256,
