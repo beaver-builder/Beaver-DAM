@@ -10,9 +10,7 @@ import env from '../../src/config';
 
 const {ethers} = await network.connect();
 
-
 async function deploy(contractPath:string, contractNane:string, args:any) {
-
 
   console.log(`\n -- ${contractNane} --\n`);
 

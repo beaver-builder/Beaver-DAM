@@ -2,7 +2,6 @@
   "name": "beaver-dam",
   "version": "2.5.4",
   "description": "Template for new projects using RMRK protocol on EVM",
-  "type": "module",
   "scripts": {
     "test": "hardhat typechain && hardhat test",
     "compile": "hardhat compile",

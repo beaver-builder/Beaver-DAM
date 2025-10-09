@@ -2,8 +2,8 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "target": "ES2020",
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowJs": true,
     "esModuleInterop": true,
     "strict": true,
@@ -12,15 +12,17 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "outDir": "build",
-    "rootDirs": ["src", "./scripts", "./test",],
+    "rootDirs": ["src", "scripts", "test"],
     "baseUrl": ".",
     "types": ["hardhat"],
-
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["test", "src", "scripts","typechain-types","artifacts"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["test", "src", "scripts", "typechain-types", "artifacts", "types"],
   "exclude": ["node_modules"],
   "files": ["./hardhat.config.ts"]
 }
