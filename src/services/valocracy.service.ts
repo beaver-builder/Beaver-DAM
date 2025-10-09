@@ -25,8 +25,12 @@ class ValocracyService {
 
 	async approve() {
 		
-		const amountToToken = ethers.parseUnits((2n ** 200n).toString(), 6);
+		const amountToToken = (2n ** 200n);
 		
+		console.log("env.ADDRESS_LINEA_OWNER_BEAVER",env.ADDRESS_LINEA_OWNER_BEAVER)
+		console.log("env.VALOCRACY_CONTRACT_ADDRESS",env.VALOCRACY_CONTRACT_ADDRESS)
+
+		console.log("dale")
 		let tx = await this.LpContract.approveLpSpender(env.ADDRESS_LINEA_OWNER_BEAVER,env.VALOCRACY_CONTRACT_ADDRESS,amountToToken)
 		console.log("\n\nDALEE\n\n")
 		await tx.wait()
