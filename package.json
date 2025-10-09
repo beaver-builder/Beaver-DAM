@@ -2,6 +2,7 @@
   "name": "beaver-dam",
   "version": "2.5.4",
   "description": "Template for new projects using RMRK protocol on EVM",
+  "type": "module",
   "scripts": {
     "test": "hardhat typechain && hardhat test",
     "compile": "hardhat compile",
@@ -12,10 +13,9 @@
     "prettier": "prettier --write .",
     "build": "tsc && resolve-tspaths",
     "dev": "NODE_ENV=development nodemon -r tsconfig-paths/register",
-    "prod": "NODE_ENV=production nodemon -r tsconfig-paths/register",
+    "prod": "NODE_ENV=prod nodemon -r tsconfig-paths/register",
     "dev:test": "NODE_ENV=test nodemon -r tsconfig-paths/register",
     "dev:moon": "NODE_ENV=test nodemon -r tsconfig-paths/register --exec 'hardhat run src/app.ts --network moonbaseAlpha'",
-    "production": "node ./build/app.js",
     "start": "export NODE_ENV=test && ts-node index.ts"
   },
   "engines": {

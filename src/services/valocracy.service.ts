@@ -17,7 +17,7 @@ class ValocracyService {
 	
 		await this.approve()
 
-		if(!env.PRODUCTION) {
+		if(!env.prod) {
 			await this.TransferUSDT("1000")
 		}
 		

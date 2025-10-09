@@ -14,6 +14,8 @@ import { verifyTask } from "./scripts/verify-contract";
 
 const accounts = env.KEY_LINEA_DEPLOY_BEAVER !== undefined ? [ env.KEY_LINEA_DEPLOY_BEAVER] : [];
 
+console.log("URL_RPC_NETWORK",env.URL_RPC_NETWORK)
+
 const config: HardhatUserConfig = {
     solidity: {
         version: '0.8.24',
@@ -48,6 +50,14 @@ const config: HardhatUserConfig = {
           chainType: 'l1',
           chainId: 59141,
           accounts: accounts,
+        },
+        linea: {
+          url: "https://rpc.linea.build",
+          type: 'http',
+          chainType: 'l1',
+          chainId: 59144,
+          accounts: accounts,
+          
         }
       },
       plugins: [

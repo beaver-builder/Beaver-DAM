@@ -23,6 +23,8 @@ export NODE_ENV=development && npx hardhat deploy --network localhost --contract
 export NODE_ENV=test && npx hardhat deploy --network lineaSepolia --contract usdt
 export NODE_ENV=test && npx hardhat deploy --network lineaSepolia --contract valocracy
 
+export NODE_ENV=prod && npx hardhat deploy --network linea --contract valocracy
+
 #ESTIMATE GAS
 export NODE_ENV=development && npx hardhat estimateGas --network localhost --contract usdt
 export NODE_ENV=development && npx hardhat estimateGas --network localhost --contract valocracy
