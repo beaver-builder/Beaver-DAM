@@ -14,9 +14,13 @@ async function deploy(contractPath:string, contractNane:string, args:any) {
 
   console.log(`\n -- ${contractNane} --\n`);
 
+  const constructorArgs = Array.isArray(args)
+  ? normalizeVerifyArgs([...args])
+  : [];
+
   const contractFactory = await ethers.getContractFactory(contractPath);
   
-  const contract = await contractFactory.deploy(...args)
+  const contract = await contractFactory.deploy(...constructorArgs)
   console.log("dale")
   const deploymentReceipt = await contract.deploymentTransaction()?.wait();
   await contract.waitForDeployment();
@@ -42,10 +46,11 @@ async function deploy(contractPath:string, contractNane:string, args:any) {
   try {
     if (!await isHardhatNetwork()) {
       console.log('Waiting 60 seconds before verifying contract...');
+
       await delay(60000);
       await hardhat.tasks.getTask(["verify", "etherscan"]).run({
         address: contractAddress,
-        constructorArgs: args,
+        constructorArgs: constructorArgs,
         contract: contractPath,
       });
     }

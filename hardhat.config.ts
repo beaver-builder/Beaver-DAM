@@ -15,18 +15,21 @@ const accounts = env.KEY_LINEA_DEPLOY_BEAVER !== undefined ? [ env.KEY_LINEA_DEP
 
 console.log("URL_RPC_NETWORK",env.URL_RPC_NETWORK)
 
+const sharedSolidityProfile = {
+  version: "0.8.24",
+  settings: {
+    optimizer: { enabled: true, runs: 200 },
+    evmVersion: "paris",
+  },
+};
+
 const config: HardhatUserConfig = {
     solidity: {
-      compilers: [
-        {
-          version: "0.8.24",
-          settings: {
-            optimizer: { enabled: true, runs: 200 },
-            evmVersion: "paris",
-          },
-        },
-      ],
+      profiles: {
+        default: sharedSolidityProfile,
+        production: sharedSolidityProfile,
       },
+    },
       verify: {
         etherscan: {
           apiKey: env.ETHERSCAN_API_KEY,

@@ -2,6 +2,7 @@
 import hardhat from "hardhat";
 import { delay, isHardhatNetwork, normalizeVerifyArgs } from "../utils";
 import env from "@/config";
+import { ethers } from "ethers";
 
 async function verify(
   contractPath: string,
@@ -31,12 +32,22 @@ async function verify(
 }
 
 export async function verifyContract() {
-  const argsLpValocracy = [(2n ** 200n),env.ADDRESS_LINEA_OWNER_BEAVER];
+  const args = [
+    "ipfs://QmaHYPkpyGx4a6N4nBYLMHntmj8wxRV2S7LtjU3yPgvYDx",
+    "0x0E5bBCecfD30FAb0a076C4Df16Ab0221Ae4Cd1C1",
+    env.USDC_CONTRACT_ADDRESS,
+    ethers.MaxUint256,
+    env.ADDRESS_LINEA_OWNER_BEAVER
+  ] as const;
 
-  await verify(
-    "contracts/LpValocracy.sol:LpValocracy",
-    "LP VALOCRACY",
-    argsLpValocracy,
-    "0x5E2F387A4b8f8CEA4dDA27CAd13c8963530DC6Ca"
-  );
+  const constructorArgs = Array.isArray(args)
+  ? normalizeVerifyArgs([...args])
+  : [];
+
+  await hardhat.tasks.getTask(["verify", "etherscan"]).run({
+    address: "0x08a14f06A6D65A59d967B0f135D08307A7aa4b29",
+    constructorArgs: constructorArgs,
+    contract: "contracts/Valocracy.sol:Valocracy",
+
+  });
 }

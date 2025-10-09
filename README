@@ -35,6 +35,9 @@ export NODE_ENV=test && npx hardhat estimateGas --network lineaSepolia --contrac
 #VERIFY 
 export NODE_ENV=test && npx hardhat verifyContracts --network lineaSepolia 
 
+export NODE_ENV=prod && npx hardhat verifyContracts --network linea 
+
+
 
 
 
